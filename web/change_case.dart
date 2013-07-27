@@ -1,7 +1,7 @@
 import 'dart:isolate';
 
 /**
- * Isolate used to change case of text.
+ * Isolate to change case of text.
  * For example "aBc" -becomes-> 'AbC'.
  */
 main() {
