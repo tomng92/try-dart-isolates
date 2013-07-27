@@ -1,5 +1,9 @@
 import 'dart:isolate';
 
+/**
+ * Isolate to reverse text.
+ * For example "hello" -becomes-> 'olleh'.
+ */
 main() {
   port.receive((msg, SendPort replyTo) {
     
