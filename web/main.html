@@ -12,15 +12,28 @@
 
   </head>
   <body>
-    <h1>Dart Isolates</h1>
+    <h2>Dart Isolates</h2>
     
-    <p>Enter some text: <input type='text' id='input-field' value='! dlrow olleH'/>
+    <p>Enter some text:<br>
+       <textarea id='input-field' rows='3' cols='45'>Hello world!</textarea>
+     
     
-    <p><button type='button' id='button1'>Reverse text</button>
+    <p><button type='button' id='button1'>Reverse text (use isolate #1)</button>
+    
+    <p><button type='button' id='button2'>Change text case (use isolate #2)</button>
+    
+    <p><button type='button' id='button3'>Request a file via HttpRequest (use isolate #3)</button>
+    
+    <p><button type='button' id='button4'>Reverse text (use isolate #4, created by spawnFunction())</button>
+    
+    <p><button type='button' id='button5'>Send array (to isolate #5)</button>
+    
+    <p><button type='button' id='button6'>Send map (to isolate #5)</button>
+    
+    <p><button type='button' id='button7'>Send object (to isolate #5)</button>
+    
   
-    <p><button type='button' id='button2'>Change text case</button>
-  
-    <script type="application/dart" src="main.dart"></script>
+    <script type="application/dart" src="parent.dart"></script>
     <script src="../packages/browser/dart.js"></script>
   </body>
 </html>
