@@ -1,6 +1,1 @@
-Dart Template
-===========
-
-This is the initial readme file.
-
-Test1 
+See http://dartivore.blogspot.com

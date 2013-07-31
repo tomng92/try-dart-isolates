@@ -1,7 +1,9 @@
+//library try_dart_isolates;
+
 import 'dart:html';
 import 'dart:isolate';
 import 'dart:collection';
-import 'my_object.dart';
+//part 'my_object.dart';
 
 SendPort reverserIsolate;
 SendPort changeCaseIsolate;
@@ -32,16 +34,15 @@ void main() {
   query("#button2").onClick.listen(invokeChangeCase);
   query("#button3").onClick.listen(invokeSendRequest);
   query("#button4").onClick.listen(invokeReverserSpawn);
-  query("#button5").onClick.listen(invokeEchoForArray);
-  query("#button6").onClick.listen(invokeEchoForMap);
-  query("#button7").onClick.listen(invokeEchoForObject);
+  query("#button5").onClick.listen(invokeEchoForMap);
+  query("#button6").onClick.listen(invokeEchoForObject);
   
  
   if (identical(1, 1.0)) {  // hack to detect if we're in JS
     reverserIsolateFile = reverserIsolateFile +'.js';
     changeCaseIsolateFile = changeCaseIsolateFile + '.js';
     sendRequestIsolateFile = sendRequestIsolateFile + '.js';
-    echoIsolateFile = sendRequestIsolateFile + '.js';
+    echoIsolateFile = echoIsolateFile + '.js';
   }
   
   reverserIsolate = spawnUri(reverserIsolateFile);
@@ -51,11 +52,11 @@ void main() {
   echoIsolate = spawnUri(echoIsolateFile);
 }
 
-String get inputText {
+get inputText {
   var inputElem = query("#input-field");
   return inputElem.value;
 }
-void set inputText(value) {
+set inputText(value) {
   var inputElem = query("#input-field");
   inputElem.value = value;
 }
@@ -119,7 +120,7 @@ void reverserFunction() {
 void invokeEchoForArray(MouseEvent event) {
   var textArray = inputText.split(' ');
   echoIsolate.call(textArray).then((result) {
-    inputText = result;
+    inputText = result.toString();
   });
 }
 
@@ -131,7 +132,7 @@ void invokeEchoForMap(MouseEvent event) {
   Iterable elemIter = textArray.map((String elem) => elem.substring(0, 1)); // take first character
   Map map = new Map.fromIterables(elemIter, textArray);
   echoIsolate.call(map).then((result) {
-    inputText = result;
+    inputText = result.toString();
   });
 }
 
@@ -139,10 +140,20 @@ void invokeEchoForMap(MouseEvent event) {
  * Invoke echo isolate, passing a map to it.
  */
 void invokeEchoForObject(MouseEvent event) {
-  MyObject myobj = new MyObject(inputText, 12345);
+  MyObject myobj = new MyObject(inputText);
   echoIsolate.call(myobj).then((result) {
-    inputText = result;
+    inputText = result.toString();
   });
 }
 
+
+/**
+ * Dummy class used to test message passing thru isolates.
+ */
+
+class MyObject {
+  String name;
+  MyObject(this.name);
+  String toString() => 'MyObject(name = \'' + this.name + '\')';
+}
 

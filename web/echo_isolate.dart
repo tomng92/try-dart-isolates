@@ -1,6 +1,7 @@
+
 import 'dart:isolate';
 import 'dart:mirrors';
-import 'my_object.dart';
+
 
 /**
  * Isolate that echoes objects passed to it.
@@ -14,11 +15,11 @@ main() {
     
     print('echo received "$msg" of type \'$shortClassName\'');
     
-    if (shortClassName == 'MyObject') {
-      MyObject myObj = msg as MyObject;
-      replyTo.send("Received an instance of $shortClassName. Invoking its getter 'name' returns '${myObj.name}'");
-    } else {
-      replyTo.send(msg.toString());
+    //replyTo.send("Received $shortClassName ${msg}");
+    try {
+      replyTo.send(msg); //
+    } catch (e) {
+      replyTo.send(e.toString());
     }
   });
 }

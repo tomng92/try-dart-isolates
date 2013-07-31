@@ -1,5 +1,4 @@
 import 'dart:isolate';
-import 'my_object.dart';
 
 /**
  * Isolate to reverse text.
